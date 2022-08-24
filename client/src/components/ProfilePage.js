@@ -46,6 +46,7 @@ const paperStyle={
 
 
 function ProfilePage({user}) {
+    
     const [editingMode , setEditingMode] = useState(false)
     const [openMessage, setOpenMessage] = useState(false);
     const [posts, setPosts] = useState([]);
@@ -53,59 +54,20 @@ function ProfilePage({user}) {
         fetch("/posts")
         .then(r => r.json())
         .then(posts => {
-            setPosts(posts.filter( (post) => {
-                return post.user_id === user.id
+            console.log(posts)
+            setPosts( posts.filter((post) => {
+                return post.user.id === user.id
             }))
         })
     }, [])
 
-    // const initialEditInfo = {
-    //     profile_picture_url: user.profile_picture_url,
-    //     bio: user.bio
-    // }
-
-    // const [editInfo, setEditInfo] = useState(initialEditInfo)
-
-    // function handleChange(e) {
-    //     setEditInfo({
-    //         ...editInfo,
-    //         [e.target.id]: e.target.value
-    //     })
-    // }
+ 
 
     function handleEdit() {
         setEditingMode(currentMode => !currentMode)
     }
 
-    // function handleSave() {
-    //     //patch request
-    //     fetch(`/users/${user.id}`, {
-    //         method: "PATCH",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify(editInfo)
-    //     })
-    //     .then(r => {
-    //         if (r.ok) {
-    //             r.json().then(updatedUser => {
-    //                 fetch("/profile", {
-    //                     method: "POST",
-    //                     headers: {
-    //                         "Content-Type":"application/json",
-    //                     },
-    //                     body: JSON.stringify({
-    //                         user_id: updatedUser.id,
-    //                         user_profile_picture: updatedUser.profile_picture_url
-    //                     })
-    //                 })
-    //                 setEditingMode(false)
-    //                 setEditInfo(initialEditInfo)
-    //                 setOpenMessage(true);
-    //             })
-    //         }
-    //     })
-    // }
+    
     
     function handleCloseMessage(event, reason) {
         if (reason === "clickaway") {
@@ -133,7 +95,7 @@ function ProfilePage({user}) {
                         component="img"
                         width='100%'
                         height="20%"
-                        image="/static/images/cards/paella.jpg"
+                        image={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:""}
                         alt="Profile pic"
                         />
                     <Timeline className='timeline' sx={{p:'0'}}>

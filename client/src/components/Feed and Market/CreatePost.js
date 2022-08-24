@@ -57,7 +57,7 @@ const theme = createTheme({
     }
   }})
 
- function CreatePost({ user, addPost, onSubmit }) {
+ function CreatePost({ user }) {
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(defaultValues);
     // const [imageCaption, setImageCaption] = useState("");

@@ -104,14 +104,25 @@ function PostFeed({ user}) {
         <ThemeProvider  theme={theme} >
 
         <CssBaseline />
+        <Grid 
+        style={{ display: "inline-block", backgroundColor:'black',
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed-right",
+    width: "100%",
+    height: "100%",
+    
+    backgroundRepeat: "no-repeat",
+    }}
+    >
+
         <Grid
       
-            theme={theme}
-            container
-            spacing={3}
-            alignItems="stretch"
-            sx={{color:"white"}}
-            >
+      theme={theme}
+      container
+      spacing={3}
+      alignItems="stretch"
+      sx={{color:"white"}}
+      >
             <Grid item xs={3.25}>
             <Box       position={'fixed'}>
             {/* <Paper sx={paperStyle}> */}
@@ -160,16 +171,16 @@ function PostFeed({ user}) {
                          <Card sx={{ bgcolor:'black'}}>
                             <CardHeader
                                 // // avatar={
-                                // // <Avatar sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
-                                    
-                                //   <CycloneIcon/>
-                                // {/* </Avatar>
+                                  // // <Avatar sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
+                                  
+                                  //   <CycloneIcon/>
+                                  // {/* </Avatar>
                                 // } */}
                                 justifyContent="center"
                                 title="News Feed"
                                 subheader="Welcome to Social Space"
                                 
-                            />
+                                />
                          
                       
                      
@@ -178,7 +189,7 @@ function PostFeed({ user}) {
                         </Card>
                      <Box>
                       {posts.map( (post)=>{
-                                return <UserPost key={post.id} post={post} />
+                        return <UserPost key={post.id} post={post} />
                               })}
                     </Box>
                               <CreatePost user={user}/> 
@@ -203,6 +214,7 @@ function PostFeed({ user}) {
             </Grid>
         
         </Grid>
+                          </Grid>
     </ThemeProvider>
     );
 }

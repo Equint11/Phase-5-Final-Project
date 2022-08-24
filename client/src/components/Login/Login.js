@@ -26,6 +26,7 @@ const theme = createTheme({
   }})
 
 const paperStyle={
+    // backgroundColor: "black",
     padding:'90px 100px',
     boxShadow: '5px 7px 17px #1976D2',
     width:500, 
@@ -44,9 +45,19 @@ function Login({ onLogin }) {
         <ThemeProvider  theme={theme} >
 
         <CssBaseline />
+        <Grid style={{ display: "inline-block", backgroundColor:'black',
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed-right",
+    width: "100%",
+    height: "100%",
+    position: "absolute", 
+    backgroundRepeat: "no-repeat",
+    }}> 
         <Grid >
-            <Paper elvation={5} style={paperStyle}>
-                <Grid align = 'center'>
+            <Box elvation={5} style={paperStyle}>
+                <Grid 
+                // style={{ backgroundColor:'black'}} 
+                 align = 'center'>
                     <CycloneIcon  fontSize="large"
                     sx={{ mr: 1, color: 'white' }}
                     />
@@ -97,7 +108,8 @@ function Login({ onLogin }) {
                     </Box>
                 )}
                 </Grid>
-        </Paper>
+        </Box>
+    </Grid>
     </Grid>
                 </ThemeProvider>
     )

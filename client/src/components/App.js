@@ -4,6 +4,7 @@ import NavBar from "./NavBar/NavBar"
 import PostFeed from "./Feed and Market/PostFeed"
 import Login from "./Login/Login"
 import ProfilePage from "./ProfilePage"
+import MyAccount from "./MyAccount"
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline';
@@ -44,7 +45,7 @@ function App() {
       })
   }, []);
 
-  if (!user) return <Login onLogin={setUser}/>;
+  if (!user) return <Login onLogin={setUser} />;
 
 
   return (
@@ -55,6 +56,7 @@ function App() {
       {/* <Route path="/" element={<Feed/>} /> */}
         <Route path="/" element={<PostFeed user={user}/>}/>
         <Route path="/profile" element={<ProfilePage  user={user}/>} />
+        <Route path="/myaccount" element={<MyAccount user={user} setUser={setUser}/>} />
       </Routes> 
     </ThemeProvider>
   );

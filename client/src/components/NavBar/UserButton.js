@@ -71,6 +71,9 @@ function UserButton({ user, setUser }) {
                 <MenuItem key={"profile"}>
                     <Typography textAlign="center"><Link href="/profile" color="inherit" underline="none">My Profile</Link></Typography>
                 </MenuItem>
+                <MenuItem key={"My Account"}>
+                    <Typography textAlign="center"><Link href="/myaccount" color="inherit" underline="none">My Account</Link></Typography>
+                </MenuItem>
 
                 <MenuItem key={"logout"}>
                     <Typography textAlign="center" onClick={handleLogout}>Logout</Typography>
