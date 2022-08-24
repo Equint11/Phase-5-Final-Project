@@ -1,192 +1,9 @@
-// import Box from '@mui/material/Box';
-// import { Button, Modal, IconButton, TextField, Typography, styled, Avatar, Stack, InputAdornment } from '@mui/material';
-// import { useState } from "react";
-
-
-
-
-// const modalStyle ={
-//     position: 'absolute',
-//     top:'50%',
-//     left: '50%',
-//     width: 550,
-//     transform: 'translate(-50%, -50%)',
-//     bgcolor: '#EEEEEE',
-//     border: '1px solid white',
-//     borderRadius: '5px',
-//     boxShadow: 24,
-//     p: 5
-        
-// };
-// const CustomModal = styled(Modal) ({
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center"
-// })
-
-// const UserBox = styled(Box) ({
-//     display: "flex",
-//     alignItems: "center",
-//     gap: "10px",
-//     marginBottom: "20px"
-// })
-// function CreatePost({ onSubmit }) { 
-//     const [text, setText] = useState("");
-//     const [open, setOpen] = useState(false);
-
-//     function handleChange(e) {
-//         setText(e.target.value);
-//     }
-
-    
-
-//     // User enters pop up window to choose song
-    
-
-//     // User exits pop up window 
-
-
-    
-
-//     // Once all information (caption and song) are chose, user submits and posts to the feed
-//     function handleSubmit(e) {
-//         e.preventDefault();
-//         onSubmit(text)
-//         setText("");
-       
-//     }
-
-//     return (
-//         <Box sx={{ 
-//             m: 'auto',
-//             // border: '2px solid #424242',
-//             backgroundColor:'#BDBDBD',
-//             borderRadius: '12px',
-//             p:2,
-//             mb: 2
-//         }}>
-            
-//             <Typography textAlign='center'variant="h4" sx={{m:2}}>
-//                  Create Post
-//             </Typography>
-            
-//             <TextField
-//                 id="caption"
-//                 label="Whats On Your Mind?"
-//                 placeholder="Insert Caption"
-//                 multiline
-//                 maxRows={4}
-//                 value={text}
-//                 onChange={handleChange}
-//                 sx={{width: '30vw', m:2}}
-//             />
-            
-          
-// {/*          
-//             <Modal
-//                 open={open}
-        
-//             >
-//                 <Box sx={modalStyle}>1
-//                     <Typography 
-//                     align="center"
-//                     sx={{p:1}}
-//                     variant="h5">
-                        
-//                     </Typography>
-                    
-//                    <Box textAlign='center'>
-//                     <Button  
-//                     variant="outlined" 
-//                     edge="end"  
-//                     sx={{p:1, mt:5, color:'white',  backgroundColor: '#01579B', borderColor: 'black' }} >
-//                         Add Song
-//                     </Button>
-//                     </Box>  
-//                 </Box>
-//             </Modal> */}
-//              <CustomModal
-//         open={open}
-//         onClose={e=>setOpen(false)}
-//         aria-labelledby="modal-modal-title"
-//         aria-describedby="modal-modal-description"
-//       >
-//         <Box width={500} height={280} bgcolor="white" borderRadius={3} p={8}>
-//             <Typography variant="h5" color="black" textAlign="center">
-//             Create A New Post
-//             </Typography>
-//         <UserBox>
-//             <Avatar 
-//             sx={{ width: 60, height: 60 }}
-//             />
-//                 <Typography fontWeight={900} variant="span">
-//                 </Typography>
-//         </UserBox>
-//             <Stack direction="row" mt={2} mb={3} gap={1}>
-//                 <TextField
-//                     InputLabelProps={{ shrink: true }}
-//                     InputProps={{
-//                       startAdornment: (
-//                         <InputAdornment position="start">
-                       
-//                         </InputAdornment>
-//                       ),
-//                     }}
-//                 id="image"
-//                 name="image"
-//                 label="Add A Photo"
-//                 type="text"
-//                 // value={postValues.image}
-//                 onChange={handleChange}
-//                 required
-//                 />
-//             </Stack>
-//             <TextField
-//                 sx={{ width: "100%" }}
-//                 name="description"
-//                 id="description"
-//                 multiline
-//                 rows={3}
-//                 placeholder="Add a description"
-//                 variant="standard"
-//                 // value={postValues.description}
-//                 onChange={handleChange}
-//                 required
-//                 />
-//             <Stack>
-//                 <Button onClick={handleSubmit}color="success"  display="center">POST</Button>
-//             </Stack>
-//         </Box>
-//       </CustomModal>
-            
-
-            
-        
-//         <Box textAlign='center'>
-//                 <Button variant="outlined" 
-//                             edge="end"  
-//                             sx={{p:1, mt:5, color:'#1976D2',  backgroundColor: 'black', borderColor: 'white' }}  
-//                 disabled={text.length === 0} onClick={handleSubmit}>
-//                     Submit
-//                 </Button>
-//         </Box>
-
-//         </Box>
-//     )
-// }
-
-
-// export default CreatePost
-
-
-
-
 import React from 'react';
 import { useState } from "react";
-import { Fab, Tooltip, Button, Modal, Box, Typography, styled, TextField, Avatar, Stack, InputAdornment, Paper } from "@mui/material";
+import { Fab, Tooltip, Button, Modal, Box, Typography, styled, TextField, Avatar, Stack, Paper } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from'@mui/material/IconButton';
 
 
 
@@ -206,10 +23,8 @@ const UserBox = styled(Box) ({
 })
 
 const defaultValues = {
-    user_id: undefined,
-    description: "",
+    imageCaption: "",
     image: "",
-    like: 0,
 }
 const paperStyle={
     padding:'110px 110px',
@@ -222,39 +37,42 @@ const paperStyle={
     transform: 'translate(-50%, -50%)',
 }
 
-
-export default function CreatePost({ currentUser, addPost }) {
+ function CreatePost({ user, addPost, onSubmit }) {
     const [open, setOpen] = useState(false);
-    const [postValues, setPostValues] = useState(defaultValues);
-    const [caption, setCaption] = useState("");
-    const [image, setImage] = useState("");
+    const [formData, setFormData] = useState(defaultValues);
+    // const [imageCaption, setImageCaption] = useState("");
+    const [imageData, setImageData] = useState(null);
 
-    // const {  } = currentUser
+    const { caption, image } = formData
+    console.log(user)
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setPostValues({
-            ...postValues,
-            [name]: value
-        })
+  
+
+    function handleChange(e) {
+        const {name, value} = e.target
+        setFormData({...formData, [name]: value});
     }
-
-    const handleSubmit = (e) => {
+   
+    
+        
+    
+    function handleSubmit(e){
         e.preventDefault();
-        const configObj = {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json",
-            },
-            body: JSON.stringify({...postValues, user_id: currentUser.id}),
-          };
-          fetch("/meow_posts", configObj)
-          .then(res => res.json())
-          .then((newPost) => addPost(newPost))
-        setPostValues(defaultValues);
-        setOpen(false)
+        const formData = new FormData()
+        formData.append("image", imageData)
+        formData.append("caption", caption)
+        formData.append('user_id', user.id)
+
+        fetch("/posts", {
+            method:"POST",
+            body:formData
+        })
+        .then(r => r.json())
+        .then(r =>console.log('image added'))
     }
+
+    console.log(imageData)
+    console.log(caption)
 
     return (
         <>
@@ -288,24 +106,42 @@ export default function CreatePost({ currentUser, addPost }) {
             <TextField
                 
                 sx={{ width: "100%", color:'white' }}
-                id="description"
+                id="caption"
+                label="Insert Caption"
                 multiline
                 rows={2}
                 placeholder="Whats on your mind?"
                 variant="standard"
-                // value={postValues.description}
+                name="caption"
+                // value={caption}
                 onChange={handleChange}
-                required
+               
                 />
             <Stack>
+          
+
             <IconButton aria-label="Upload Image"   variant="contained" component="label"> 
             <AddPhotoAlternateIcon/>
             <input
+                onChange={(e) => setImageData(e.target.files[0])}
                 type="file"
+                id="image"
                 hidden
-            />
+                accept="image/*"
+                />
+
             </IconButton>
-                <Button onClick={handleSubmit}color="success"  display="center">POST</Button>
+                
+        
+                <Button   variant="outlined" 
+                            edge="end"  
+                            sx={{p:1, mt:5, color:'black',  backgroundColor: '#BDBDBD', borderColor: '#F44336s', boxShadow: '5px 7px 20px -10px #1976D2', '&:hover':{
+                                backgroundColor:'#212121', color:'#1976D2', borderColor: '#1976D2'
+                            }}}  
+                //  disabled={caption.length === 0}
+                 onClick={handleSubmit}>
+             Post
+                </Button>
             </Stack>
                 </Paper>
         {/* </Box> */}
@@ -314,3 +150,4 @@ export default function CreatePost({ currentUser, addPost }) {
         </>
     )
 }
+export default CreatePost

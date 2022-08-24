@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState , useEffect } from 'react';
-import { Box, Grid, Paper, Typography, Divider,List,ListItem,ListItemButton,ListItemIcon,ListItemText} from '@mui/material';
+import { Box, Grid, Paper, Typography, Divider,List,ListItem,ListItemButton,ListItemIcon,ListItemText, Link} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline';
 import CreatePost from "./CreatePost.js"
@@ -58,30 +58,42 @@ const theme = createTheme({
 
 function PostFeed({ user}) {
   const [posts, setPosts] = useState([]);
-    // return(
-    //     <Box>
-    //         <Stack>
-    //             <Sidebar/>
-    //             <Feed/>
-    //             <Rightbar/>
+  useEffect( ()=> {
+    fetch("/posts")
+    .then(r => r.json())
+    .then(posts => {
+        console.log(posts)
+        setPosts(posts)
+    })
+} , [])
+  
+    function onSubmit(caption) {
+      console.log(caption)
 
-    //         </Stack>
-    //     </Box>
-    // );
+      let formData = { 
+           
+         
+         
+          user_id: user.id,
+          username: user.username,
+          caption: caption,
+          
+      }
 
-    fetch("/posts",{
-      method: "POST",
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      body: JSON.stringify()
-  })
-  .then(r => r.json())
-  .then(newPost => { 
-      setPosts(currentPosts => [newPost , ...currentPosts])
-  }
-  )
 
+  //   fetch("/posts",{
+  //     method: "POST",
+  //     headers: {
+  //         'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(formData)
+  // })
+  // .then(r => r.json())
+  // .then(newPost => { 
+  //     setPosts(currentPosts => [newPost , ...currentPosts])
+  // }
+  // )
+    }
 
   
     
@@ -111,9 +123,10 @@ function PostFeed({ user}) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton href="/profile">
+            {/* <Link href="/profile" color="inherit" underline="none"><PersonIcon /></Link> */}
               <ListItemIcon>
-                <PersonIcon/>
+                <PersonIcon />
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </ListItemButton>
@@ -135,26 +148,14 @@ function PostFeed({ user}) {
             </ListItemButton>
           </ListItem>
         </List>
-            {/* <List>
-                {friendships.map(friend => {
-                    return <ListItem sx={{justifyContent: 'space-between'}} key={friend.id}>
-                    <Box sx={{display:'flex', alignItems: 'center'}}>
-                    <Avatar></Avatar>
-                    <Typography variant="h6" sx={{p:2}}> placeholder ="Search Social Space..." </Typography>
-                    </Box> 
-                    </ListItem>
-                })}
-            </List> */}
-        {/* </Paper> */}
-            </Grid>
-
+      </Grid>
             <Grid item xs={5.5} justifyContent="center">
                 <Paper sx={paperStyle} >
-                     <CreatePost  /> 
+                     <CreatePost user={user}/> 
                      <Box>
-                        {/* {posts.map( (post)=>{
+                      {posts.map( (post)=>{
                                 return <UserPost key={post.id} post={post} />
-                        })} */}
+                        })}
                     </Box>
                          <Card sx={{ }}>
                             <CardHeader
@@ -168,20 +169,18 @@ function PostFeed({ user}) {
                                     <MoreVertIcon />
                                 </IconButton>
                                 }
-                                title="Shrimp and Chorizo Paella"
+                                title=""
                                 subheader="September 14, 2016"
                             />
                             <CardMedia
                                 component="img"
                                 height="20%"
                                 image="/static/images/cards/paella.jpg"
-                                alt="Paella dish"
+                                alt="q"
                             />
                             <CardContent>
                                 <Typography variant="body2" color="text.secondary">
-                                This impressive paella is a perfect party dish and a fun meal to cook
-                                together with your guests. Add 1 cup of frozen peas along with the mussels,
-                                if you like.
+                              .
                                 </Typography>
                             </CardContent>
                             <CardActions disableSpacing>

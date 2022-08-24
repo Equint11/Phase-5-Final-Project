@@ -6,6 +6,7 @@ class PostsController < ApplicationController
     end
 
     def create
+        
         new_post = Post.create!(post_params)
         render json: new_post, status: :created
     end
@@ -19,6 +20,8 @@ class PostsController < ApplicationController
     private
     
     def post_params
-        params.permit(:caption, :image, :preview_url, :user_id, :username, :user_profile_picture)
+        params.permit(:caption, :image, :user_id)
+
     end
 end
+#  :user_id, :username, :user_profile_picture

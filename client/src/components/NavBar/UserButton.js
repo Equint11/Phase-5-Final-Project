@@ -27,6 +27,16 @@ function UserButton({ user, setUser }) {
             }
         });
     }
+    const handleDeleteAcount = () =>{
+        fetch(`/users/${user.id}`,{
+            method: "DELETE"
+        })
+        .then((r) => {
+            if (r.ok) {
+              setUser(null);
+            }
+        });
+    }
 
     return (
         <Box sx={{ flexGrow: 0 }}>
@@ -64,6 +74,9 @@ function UserButton({ user, setUser }) {
 
                 <MenuItem key={"logout"}>
                     <Typography textAlign="center" onClick={handleLogout}>Logout</Typography>
+                </MenuItem>
+                <MenuItem key={"Delete Acount"}>
+                    <Typography textAlign="center" color='red' onClick={handleDeleteAcount}  >DELETE ACCOUNT</Typography>
                 </MenuItem>
             </Menu>
         </Box>
