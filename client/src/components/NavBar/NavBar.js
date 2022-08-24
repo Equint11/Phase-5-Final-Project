@@ -19,7 +19,7 @@ import { useState } from "react";
 
 
 const paperStyle={
-    boxShadow: '5px 7px 17px #78909c',
+    boxShadow: '5px 7px 17px black',
     marginBottom:"20px",}
 
 const theme = createTheme({
@@ -93,7 +93,7 @@ function NavBar({ user, setUser, setFriendships }) {
     return (
         <ThemeProvider  theme={theme} >
         <CssBaseline />
-            <Box sx={{ flexGrow: 1 }}>
+            <Box  sx={{ flexGrow: 1 }}>
               <Paper  elvation={5} style={paperStyle}>
 
                 <AppBar position="sticky" sx={{backgroundColor: "#000000", borderColor: 'white'}}>

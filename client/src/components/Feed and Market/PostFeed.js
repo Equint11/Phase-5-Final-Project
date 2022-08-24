@@ -23,18 +23,20 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupIcon from '@mui/icons-material/Group';
 import UserPost from "./UserPost.js"
+import CycloneIcon from '@mui/icons-material/Cyclone';
 
 // import { Stack } from '@mui/system';
 
 
 
 const paperStyle={
-    backgroundColor:'#424242',
-    borderRadius: '1px',
-    m:2,
-    p:1,
-    // boxShadow: '5px 7px 17px #1976D2',
-    marginBottom:"20px",}
+   backgroundColor:'dark',
+    // borderRadius: '1px',
+    // m:2,
+    // p:1,
+    // boxShadow: '5px 7px 17px black',
+    // marginBottom:"20px",
+  }
     
 const theme = createTheme({
     palette: {
@@ -42,7 +44,7 @@ const theme = createTheme({
       primary: {
         main: "#38b3dc",
         light: "#abdef0",
-        dark: "#BDBDBD",
+        dark: "#212121",
        
       },
       secondary: {
@@ -103,6 +105,7 @@ function PostFeed({ user}) {
 
         <CssBaseline />
         <Grid
+      
             theme={theme}
             container
             spacing={3}
@@ -110,9 +113,11 @@ function PostFeed({ user}) {
             sx={{color:"white"}}
             >
             <Grid item xs={3.25}>
+            <Box       position={'fixed'}>
             {/* <Paper sx={paperStyle}> */}
             <Typography variant="h6"></Typography>
-            <Divider sx={{mt:2, mb:10}}/>
+            <Divider sx={{mt:2, mb:10, mr:-20}}/>
+
         <List>
           <ListItem disablePadding>
             <ListItemButton>
@@ -148,81 +153,53 @@ function PostFeed({ user}) {
             </ListItemButton>
           </ListItem>
         </List>
+            </Box>
       </Grid>
             <Grid item xs={5.5} justifyContent="center">
                 <Paper sx={paperStyle} >
-                     <CreatePost user={user}/> 
-                     <Box>
-                      {posts.map( (post)=>{
-                                return <UserPost key={post.id} post={post} />
-                        })}
-                    </Box>
-                         <Card sx={{ }}>
+                         <Card sx={{ bgcolor:'black'}}>
                             <CardHeader
-                                avatar={
-                                <Avatar sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
-                                    R
-                                </Avatar>
-                                }
-                                action={
-                                <IconButton aria-label="settings">
-                                    <MoreVertIcon />
-                                </IconButton>
-                                }
-                                title=""
-                                subheader="September 14, 2016"
+                                // // avatar={
+                                // // <Avatar sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
+                                    
+                                //   <CycloneIcon/>
+                                // {/* </Avatar>
+                                // } */}
+                                justifyContent="center"
+                                title="News Feed"
+                                subheader="Welcome to Social Space"
+                                
                             />
-                            <CardMedia
-                                component="img"
-                                height="20%"
-                                image="/static/images/cards/paella.jpg"
-                                alt="q"
-                            />
-                            <CardContent>
-                                <Typography variant="body2" color="text.secondary">
-                              .
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                <FavoriteIcon />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                <ShareIcon />
-                                </IconButton>
-                            
-                            </CardActions>
+                         
+                      
+                     
                             
                         
                         </Card>
+                     <Box>
+                      {posts.map( (post)=>{
+                                return <UserPost key={post.id} post={post} />
+                              })}
+                    </Box>
+                              <CreatePost user={user}/> 
+                    
+                                
                     {/* </Box> */}
                 </Paper>
             </Grid>
-            
-            <Grid item xs={3.25}>
-                {/* <Paper sx={paperStyle}> */}
-                    <Typography variant="h4">
-                    <IconButton sx={{size:"large"}}>
-                     
 
-                    <GroupIcon
-                      sx={{mr:2, ml:20, }} 
-                     />
-                      Friends
-                     </IconButton>
+            <Grid item xs={3.25}>
+                 <Box       position={'fixed'}>             
+                      <Divider sx={{mt:2, mb:2, ml:5, mr:-10}}/>                                 
+                    <Typography variant="h4">
+                      <IconButton sx={{size:"large"}}>                  
+                        <GroupIcon
+                          sx={{mr:2, ml:20, }} 
+                          />
+                          Friends
+                      </IconButton>
                     </Typography>
-                    <Divider sx={{mt:2, mb:2}}/>
-                    {/* <List>
-                        {friendships.map(friend => {
-                            return <ListItem sx={{justifyContent: 'space-between'}} key={friend.id}>
-                            <Box sx={{display:'flex', alignItems: 'center'}}>
-                            <Avatar></Avatar>
-                            <Typography variant="h6" sx={{p:2}}> placeholder ="Search Social Space..." </Typography>
-                            </Box> 
-                            </ListItem>
-                        })}
-                    </List> */}
-                {/* </Paper> */}
+                  </Box>
             </Grid>
         
         </Grid>

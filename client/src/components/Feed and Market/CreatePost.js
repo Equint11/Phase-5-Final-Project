@@ -4,6 +4,7 @@ import { Fab, Tooltip, Button, Modal, Box, Typography, styled, TextField, Avatar
 import { Add } from "@mui/icons-material";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import IconButton from'@mui/material/IconButton';
+import { createTheme, ThemeProvider } from '@mui/material/styles'
 
 
 
@@ -36,6 +37,25 @@ const paperStyle={
     left: '50%',
     transform: 'translate(-50%, -50%)',
 }
+const theme = createTheme({
+    palette: {
+      mode:'dark',
+      primary: {
+        main: "#38b3dc",
+        light: "#abdef0",
+        dark: "#BDBDBD",
+       
+      },
+      secondary: {
+        main: "#e6e9fa"
+      },
+      button: {
+        '&:hover': {
+          backgroundColor: '#fff',
+          color: '#3c52b2',
+      }
+    }
+  }})
 
  function CreatePost({ user, addPost, onSubmit }) {
     const [open, setOpen] = useState(false);

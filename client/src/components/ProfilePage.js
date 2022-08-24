@@ -22,6 +22,7 @@ import { lineHeight } from '@mui/system';
 import "./ProfilePage.css";
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import UserPost from "./Feed and Market/UserPost";
 
 
 
@@ -44,9 +45,19 @@ const paperStyle={
 
 
 
-function ProfilePage() {
+function ProfilePage({user}) {
     const [editingMode , setEditingMode] = useState(false)
     const [openMessage, setOpenMessage] = useState(false);
+    const [posts, setPosts] = useState([]);
+    useEffect( ()=> {
+        fetch("/posts")
+        .then(r => r.json())
+        .then(posts => {
+            setPosts(posts.filter( (post) => {
+                return post.user_id === user.id
+            }))
+        })
+    }, [])
 
     // const initialEditInfo = {
     //     profile_picture_url: user.profile_picture_url,
@@ -110,7 +121,7 @@ function ProfilePage() {
             <Stack direction='row' spacing={2} justifyContent="space-between">
                 <Box flex={1} p={2} width='100%' sx={{bgcolor:'black', borderRadius:'6px' }}>
                     <Typography sx={{p:'20px', lineHeight:'18px', fontSize:'17px', fontWeight:'bold', color:'#1976D2'}}>
-                        name
+                    {user.fullname}
                     </Typography>
                     
                     <CardMedia
@@ -154,18 +165,18 @@ function ProfilePage() {
                         <Box >
 
                     <Fab onClick={handleEdit} size="10px" color="black" aria-label="edit" >
-                    {/* <IconButton 
+                    <IconButton 
                         size="small" 
                         aria-label="edit" 
-                        sx={{border: "1px solid grey", borderRadius: 1}}
-                        >
-                        <EditIcon sx={{ fontSize: "8px" }} />
                         
-                    </IconButton> */}
+                        >
+                        <EditIcon sx={{ color:'black',fontSize: "30px" }} />
+                        
+                    </IconButton>
                    
-                            <BorderColorIcon fontSize="small"
+                            {/* <BorderColorIcon fontSize="small"
                             sx={{ mr: 1, padding:'200', color: '#1976D2' }}
-                            /> 
+                            />  */}
       
                     </Fab>
                             </Box>
@@ -176,49 +187,17 @@ function ProfilePage() {
                 <Paper sx={paperStyle} >
                      
                      <Box>
-                      {/* {posts.filter( (post)=> {
-                            return (post.user_id)
-                        }).map( (post)=>{
-                                return <UserPost key={post.id} post={post} />
-                        })} */}
+                     {posts.map( (post)=>{
+                            return <UserPost key={post.id} post={post} user={user}  />
+                        })}
                     </Box>
                          <Card sx={{ }}>
                             <CardHeader
-                                avatar={
-                                <Avatar sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
-                                    R
-                                </Avatar>
-                                }
-                                action={
-                                <IconButton aria-label="settings">
-                                    <MoreVertIcon />
-                                </IconButton>
-                                }
-                                title="erik"
-                                subheader="September 14, 2016"
-                            />
-                            <CardMedia
-                                component="img"
-                                height="20%"
-                                image="/static/images/cards/paella.jpg"
-                                alt="Paella dish"
-                            />
-                            <CardContent>
-                                <Typography variant="body2" color="text.secondary">
-                                This impressive paella is a perfect party dish and a fun meal to cook
-                                together with your guests. Add 1 cup of frozen peas along with the mussels,
-                                if you like.
-                                </Typography>
-                            </CardContent>
-                            <CardActions disableSpacing>
-                                <IconButton aria-label="add to favorites">
-                                <FavoriteIcon />
-                                </IconButton>
-                                <IconButton aria-label="share">
-                                <ShareIcon />
-                                </IconButton>
+                             
+                                title ={`${user.fullname}'s Post`}
+                                subheader={`${user.username}`}
+                                />
                             
-                            </CardActions>
                             
                         
                         </Card>
