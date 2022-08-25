@@ -93,9 +93,9 @@ function ProfilePage({user}) {
                         }}
                         
                         component="img"
-                        width='100%'
+                        width='20%'
                         height="20%"
-                        image={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:""}
+                        image={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:"https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg"}
                         alt="Profile pic"
                         />
                     <Timeline className='timeline' sx={{p:'0'}}>
@@ -126,7 +126,7 @@ function ProfilePage({user}) {
                         bio
                         <Box >
 
-                    <Fab onClick={handleEdit} size="10px" color="black" aria-label="edit" >
+                    {/* <Fab onClick={handleEdit} size="10px" color="black" aria-label="edit" >
                     <IconButton 
                         size="small" 
                         aria-label="edit" 
@@ -140,7 +140,7 @@ function ProfilePage({user}) {
                             sx={{ mr: 1, padding:'200', color: '#1976D2' }}
                             />  */}
       
-                    </Fab>
+                    {/* </Fab> */} 
                             </Box>
                     </Box>
                 </Box>
