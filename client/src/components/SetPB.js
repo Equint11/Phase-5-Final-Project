@@ -117,12 +117,20 @@ function SetPB({user, setUser}) {
               <Button type="submit"
                      variant="outlined" 
                             edge="end"  
-                            sx={{p:1, mt:5, color:'black',  backgroundColor: '#BDBDBD', borderColor: '#F44336s', boxShadow: '5px 7px 20px -10px #1976D2',  '&:hover':{
+                            sx={{p:1, mt:5, color:'white',  backgroundColor: '#1976D2', borderColor: '#F44336s', boxShadow: '5px 7px 20px -10px #1976D2',  '&:hover':{
                                 backgroundColor:'#212121', color:'#1976D2', borderColor: '#1976D2'
                             }}}>
                 Ok
               </Button>
             </Grid>
+              <Button href='/'
+                     variant="outlined" 
+                            edge="end"  
+                            sx={{p:1, mt:5, color:'black',  backgroundColor: '#BDBDBD', borderColor: '#F44336s', boxShadow: '5px 7px 20px -10px #1976D2',  '&:hover':{
+                                backgroundColor:'#212121', color:'#1976D2', borderColor: '#1976D2'
+                            }}}>
+                Skip
+              </Button>
             </Grid>
           </form>
         </Grid>
