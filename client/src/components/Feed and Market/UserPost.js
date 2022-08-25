@@ -33,7 +33,7 @@ const theme = createTheme({
   }})
 
 
-function UserPost( { post } ) {
+function UserPost( { post, user} ) {
     
   
   return (
@@ -41,11 +41,13 @@ function UserPost( { post } ) {
 
 
         <CssBaseline />
-    <Card sx={{boxShadow: '1px 1px 5px black'}}>
+    <Card sx={{boxShadow: '1px 1px 5px black', backgroundColor:'black'}}>
         <CardHeader
             avatar={
-                <Avatar sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
-                {post.user.username}
+            <Avatar 
+            src={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:"https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg"}
+            sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
+                
             </Avatar>
             }
             action={
@@ -53,19 +55,19 @@ function UserPost( { post } ) {
                 <MoreVertIcon />
             </IconButton>
             }
-            title={`${post.user.fullname} (${post.user.username})`}
-            subheader={post.created_at}
+            title={post.user.fullname}
+            subheader={post.user.username}
             />
+          <Typography variant="body1" color="white">
+                {post.caption}
+             </Typography>
         <CardMedia
             component="img"
-            sx={{ m: 'auto', height: 500, width: 700 }} 
+            sx={{ m: 'auto', height: 500, width: '100%' }} 
             image={`http://localhost:4000/${post.image}`}
             alt="image"
             />
         <CardContent>
-          <Typography variant="body1" color="white">
-                {post.caption}
-             </Typography>
         </CardContent>
         <CardActions disableSpacing>
            <IconButton aria-label="add to favorites">

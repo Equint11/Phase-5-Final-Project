@@ -35,11 +35,12 @@ import UserPost from "./Feed and Market/UserPost";
 // import { Stack } from '@mui/system';
 
 const paperStyle={
-    backgroundColor:'#424242',
+    backgroundColor:'black',
     borderRadius: '1px',
     m:2,
     p:1,
-    // boxShadow: '5px 7px 17px #1976D2',
+    //  boxShadow: '5px 7px 17px #1976D2',
+     boxShadow: '5px 11px 17px #1976D2',
     marginBottom:"20px",}
     
 
@@ -79,14 +80,28 @@ function ProfilePage({user}) {
 
 
     return(
+        <Grid style={{ display: "inline-block", backgroundColor:'black',
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed-right",
+        width: "100%",
+        height: "100%",
+        
+        backgroundRepeat: "no-repeat",
+        }}>
+             
         <Box>
             <Stack direction='row' spacing={2} justifyContent="space-between">
-                <Box flex={1} p={2} width='100%' sx={{bgcolor:'black', borderRadius:'6px' }}>
-                    <Typography sx={{p:'20px', lineHeight:'18px', fontSize:'17px', fontWeight:'bold', color:'#1976D2'}}>
+                <Box flex={1.5} p={2} width='100%' sx={{bgcolor:'black', borderRadius:'6px' }}>
+                    <Avatar 
+                    src={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:"https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg"}
+                    sx={{ height: '200px', width: '200px',bgcolor: '#1976D2' }} aria-label="recipe"
+            >
+                        
+                    </Avatar>
+                    <Typography sx={{p:'20px', lineHeight:'40px', fontSize:'40px', fontWeight:'bold', color:'white'}}>
                     {user.fullname}
                     </Typography>
-                    
-                    <CardMedia
+                    {/* <CardMedia
                         sx={{
                             marginTop:'-10px'
                             
@@ -97,14 +112,14 @@ function ProfilePage({user}) {
                         height="20%"
                         image={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:"https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg"}
                         alt="Profile pic"
-                        />
+                        /> */}
                     <Timeline className='timeline' sx={{p:'0'}}>
                         <TimelineItem>
                         <TimelineSeparator>
                             <TimelineDot sx={{bgcolor:'#1976D2', p:'2px'}} />
                             <TimelineConnector  />
                         </TimelineSeparator>
-                        <TimelineContent>Name</TimelineContent>
+                        <TimelineContent>Lives</TimelineContent>
                         </TimelineItem>
                         <TimelineItem>
                         <TimelineSeparator>
@@ -122,56 +137,44 @@ function ProfilePage({user}) {
                         </TimelineItem>
                         
                     </Timeline>
-                    <Box>
-                        bio
+                    <Typography sx={{ lineHeight:'40px', fontSize:'25px', fontWeight:'bold', color:'white'}}>
+                        Bio
                         <Box >
-
-                    {/* <Fab onClick={handleEdit} size="10px" color="black" aria-label="edit" >
-                    <IconButton 
-                        size="small" 
-                        aria-label="edit" 
-                        
-                        >
-                        <EditIcon sx={{ color:'black',fontSize: "30px" }} />
-                        
-                    </IconButton>
-                   
-                            {/* <BorderColorIcon fontSize="small"
-                            sx={{ mr: 1, padding:'200', color: '#1976D2' }}
-                            />  */}
-      
-                    {/* </Fab> */} 
-                            </Box>
-                    </Box>
+                            <Typography sx={{ lineHeight:'40px', fontSize:'15px', color:'white'}}>
+                            {user.bio}  
+                            </Typography>
+                        </Box>
+                    </Typography>
                 </Box>
-                <Box flex={4} p={2}>
-                <Grid item xs={5.5} justifyContent="center">
+                <Box flex={4} p={2} sx={{ bgcolor:'black'}}>
+                <Grid item xs={5.5} justifyContent="center" sx={{ bgcolor:'black'}}>
                 <Paper sx={paperStyle} >
                      
-                     <Box>
-                     {posts.map( (post)=>{
-                            return <UserPost key={post.id} post={post} user={user}  />
-                        })}
-                    </Box>
-                         <Card sx={{ }}>
+                         <Card sx={{ bgcolor:'black'}}>
                             <CardHeader
                              
-                                title ={`${user.fullname}'s Post`}
-                                subheader={`${user.username}`}
-                                />
+                             title ={`${user.fullname}'s Post`}
+                             subheader={`${user.username}`}
+                             />
                             
                             
                         
                         </Card>
+                             <Box>
+                             {posts.map( (post)=>{
+                                    return <UserPost key={post.id} post={post} user={user}  />
+                                })}
+                            </Box>
                     {/* </Box> */}
                 </Paper>
             </Grid>
                 </Box>
                 <Box flex={1} p={2}>
-                    hi
+                  
                 </Box>
             </Stack>
         </Box>
+        </Grid>
 
     );
 }

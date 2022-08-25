@@ -5,6 +5,7 @@ import { Add } from "@mui/icons-material";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import IconButton from'@mui/material/IconButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -28,8 +29,9 @@ const defaultValues = {
     image: "",
 }
 const paperStyle={
+    backgroundColor:'black',
     padding:'110px 110px',
-    boxShadow: '5px 7px 17px #1976D2',
+    // boxShadow: '5px 7px 17px #1976D2',
     width:500, 
     margin:"20px auto",
     position: 'absolute',
@@ -58,6 +60,7 @@ const theme = createTheme({
   }})
 
  function CreatePost({ user }) {
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState(defaultValues);
     // const [imageCaption, setImageCaption] = useState("");
@@ -88,7 +91,9 @@ const theme = createTheme({
             body:formData
         })
         .then(r => r.json())
-        .then(r =>console.log('image added'))
+        .then(r =>{
+            navigate('/profile')
+          } )
     }
 
     console.log(imageData)
@@ -104,23 +109,25 @@ const theme = createTheme({
         </Tooltip>
         <Button></Button>
       <CustomModal
+      
         open={open}
         onClose={e=>setOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         {/* <Box bgcolor="#212121" > */}
-            <Paper elvation={5} style={paperStyle}>
+            <Paper elvation={5} style={paperStyle} >
 
-            <Typography variant="h6" color="#white" textAlign="center">
+            <Typography  sx={{ lineHeight:'40px', fontSize:'30px', color:'white', pb:'50'}} variant="h5" color="#white" textAlign="center" >
             Create A New Post
             </Typography>
         <UserBox>
-            <Avatar 
+            <Avatar
+            src={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:"https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg"}
             sx={{ width: 30, height: 30 }}
             />
             <Typography fontWeight={500} variant="span">
-                name
+                {user.fullname}
             </Typography >
         </UserBox>
             <TextField

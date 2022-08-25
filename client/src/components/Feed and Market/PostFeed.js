@@ -31,10 +31,11 @@ import CycloneIcon from '@mui/icons-material/Cyclone';
 
 const paperStyle={
    backgroundColor:'dark',
-    // borderRadius: '1px',
+   mt:'10px',
+   borderRadius: '170px',
     // m:2,
     // p:1,
-    // boxShadow: '5px 7px 17px black',
+    boxShadow: '5px 11px 17px grey',
     // marginBottom:"20px",
   }
     
@@ -170,26 +171,15 @@ function PostFeed({ user}) {
                 <Paper sx={paperStyle} >
                          <Card sx={{ bgcolor:'black'}}>
                             <CardHeader
-                                // // avatar={
-                                  // // <Avatar sx={{ bgcolor: '#1976D2' }} aria-label="recipe">
-                                  
-                                  //   <CycloneIcon/>
-                                  // {/* </Avatar>
-                                // } */}
+                             sx={{mt:'10px'}}                  
                                 justifyContent="center"
                                 title="News Feed"
-                                subheader="Welcome to Social Space"
-                                
-                                />
-                         
-                      
-                     
-                            
-                        
+                                subheader="Welcome to Social Space"                               
+                                />         
                         </Card>
                      <Box>
                       {posts.map( (post)=>{
-                        return <UserPost key={post.id} post={post} />
+                        return <UserPost user={user} key={post.id} post={post} />
                               })}
                     </Box>
                               <CreatePost user={user}/> 

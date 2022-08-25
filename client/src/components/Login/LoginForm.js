@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Box, Button , TextField , Alert } from '@mui/material';
+import { useNavigate } from "react-router-dom";
 
 function LoginForm({ onLogin, setFriendships }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   
 
   function handleSubmit(e) {
@@ -21,6 +23,7 @@ function LoginForm({ onLogin, setFriendships }) {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) => {
+          navigate('/profile')
           onLogin(user)
         })}
       else {

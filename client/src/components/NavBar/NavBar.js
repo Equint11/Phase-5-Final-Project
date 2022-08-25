@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Link } from "react-router-dom";
 import { AppBar, Tooltip, IconButton, Toolbar, Typography, createTheme, ThemeProvider, Box, Paper } from '@mui/material';
-// import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 // import SearchBar from "./SearchBar.js"
 // import HomeButton from "./HomeButton.js"
 // import ExploreButton from "./ExploreButton.js"
@@ -16,11 +15,12 @@ import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import { useState } from "react";
+import Avatar from '@mui/material/Avatar';
 
 
 const paperStyle={
-    boxShadow: '5px 7px 17px black',
-    marginBottom:"20px",}
+    boxShadow: '5px 1px 17px black',
+    marginBottom:"10px",}
 
 const theme = createTheme({
     palette: {
@@ -93,12 +93,13 @@ function NavBar({ user, setUser, setFriendships }) {
     return (
         <ThemeProvider  theme={theme} >
         <CssBaseline />
-            <Box  sx={{ flexGrow: 1 }}>
+        
+            <Box sx={{ flexGrow: 1, backgroundColor:'black'}}>
               <Paper  elvation={5} style={paperStyle}>
 
                 <AppBar position="sticky" sx={{backgroundColor: "#000000", borderColor: 'white'}}>
                     {/* <Container maxWidth="xl"> */}
-                    <Toolbar>
+                    <Toolbar sx={{ flexGrow: 1, backgroundColor:'black'}}>
                     
                         <IconButton
                          href="/"
@@ -117,7 +118,7 @@ function NavBar({ user, setUser, setFriendships }) {
                             
                         <Typography variant="h6" component="div" href="/"
                             sx={{
-                              mr: 2,
+                              mr: 27,
                               fontWeight: 700,
                               letterSpacing: '.2rem',
                               textDecoration: 'none',
@@ -126,7 +127,7 @@ function NavBar({ user, setUser, setFriendships }) {
                             >
                             Social Space
                         </Typography>
-                        <Search>
+                        <Search sx={{pl:'5px'}}>
                             <SearchIconWrapper>
                             <SearchIcon />
                             </SearchIconWrapper>
@@ -162,9 +163,19 @@ function NavBar({ user, setUser, setFriendships }) {
                         {/* </Link>  */}
 
                         <NotificationsButton sx={{backgroundColor: "#000000", fontSize:"large"}} /> 
+                        <IconButton>
 
-                        <UserButton
-                        sx={{backgroundColor: "#000000"}}  user={user} setUser={setUser}/>
+                        <Avatar
+                         
+                         >
+                          <UserButton
+                          src={user.profile_picture?`http://localhost:4000/${user.profile_picture}`:"https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small/profile-icon-design-free-vector.jpg"}
+                          sx={{backgroundColor: "#000000"}}  user={user} setUser={setUser}
+                          
+                          />
+          
+                        </Avatar>
+                        </IconButton>
             
                     </Toolbar>
                     {/* </Container> */}
