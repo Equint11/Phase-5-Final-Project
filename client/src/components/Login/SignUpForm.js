@@ -33,7 +33,7 @@ function SignUpForm({ onLogin }) {
       setIsLoading(false);
       if (r.ok) {
         r.json().then((user) =>{
-          navigate('/myaccount')
+          navigate('/SetPB')
            onLogin(user)});
       } else {
         r.json().then((err) => {

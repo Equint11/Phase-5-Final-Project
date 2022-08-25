@@ -131,25 +131,25 @@ function PostFeed({ user}) {
             <Divider sx={{mt:2, mb:10, mr:-20}}/>
 
         <List>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Home/>
+                </ListItemIcon>
+                <ListItemText primary="Homepage" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton href="/profile">
+              {/* <Link href="/profile" color="inherit" underline="none"><PersonIcon /></Link> */}
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                <ListItemText primary="Profile" />
+              </ListItemButton>
+            </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Home/>
-              </ListItemIcon>
-              <ListItemText primary="Homepage" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton href="/profile">
-            {/* <Link href="/profile" color="inherit" underline="none"><PersonIcon /></Link> */}
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton href='/SetPB'>
               <ListItemIcon>
                 <StorefrontIcon/>
               </ListItemIcon>

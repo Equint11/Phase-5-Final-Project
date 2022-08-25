@@ -5,6 +5,7 @@ import PostFeed from "./Feed and Market/PostFeed"
 import Login from "./Login/Login"
 import ProfilePage from "./ProfilePage"
 import MyAccount from "./MyAccount"
+import SetPB from "./SetPB"
 
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline';
@@ -57,6 +58,7 @@ function App() {
         <Route path="/" element={<PostFeed user={user}/>}/>
         <Route path="/profile" element={<ProfilePage  user={user}/>} />
         <Route path="/myaccount" element={<MyAccount user={user} setUser={setUser}/>} />
+        <Route path="/SetPB" element={<SetPB user={user} setUser={setUser}/>} />
       </Routes> 
     </ThemeProvider>
   );
